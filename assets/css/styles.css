@@ -38,4 +38,17 @@ html {
     color: #fff;
 }
 
+.row {
+    margin: 20px auto;
+}
 
+.center {
+    margin: auto;
+    width: 50%;
+    border: 7px solid green;
+    padding: 10px;
+}
+
+.covid-block {
+    background-color: #fff3e6;
+}
