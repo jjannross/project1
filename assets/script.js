@@ -20,13 +20,18 @@ $(document).ready(function() {
       }).then(function(authResponse){
           console.log(authResponse);
         $.ajax({
-            url: "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2021-02-01&adults=1",
+            url: "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2021-02-01&adults=1&max=5&currencyCode=USD",
             type: 'GET',
             // Fetch the stored token from localStorage and set in the header
             headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
           }).then(function(response){
               console.log(response);
-              //code
+              
+              console.log(response.data[0])
+              //base price
+              console.log(response.data[0].price.base)
+              //airline code
+              console.log(response.data[0].validatingAirlineCodes)
           })
       })
 })
