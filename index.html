@@ -21,10 +21,59 @@
         <p class="lead">Search for Flights Keeping Your Safety in Mind!</p>
         <p id="currentDay" class="lead"></p>
     </header>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <header class="row destination-block">
+                    <div class="col-md-12 pt-3">
+                      <div class="page-header">
+                        <h3>Destination</h3>
+                      </div>
+                      <hr>
+                    </div>
+                </header>
+                <div class="row destination-block">
+                    <div class="col-md-6">
+                        <form class="col-md-12">
+                             <div class="row">
+                                <i class="material-icons prefix">flight_takeoff</i>
+                                <input type="text" id="origin-input" class="autocomplete" required minlength="2"
+                                placeholder="Origin - US Cities Only">
+                            </div>
+                            <div class="row">
+                                <i class="material-icons prefix">flight_land</i>
+                                <input type="text" id="destination-input" class="autocomplete" required minlength="2"
+                                    placeholder="Destination - US Cities Only">
+                            </div>
+                            <div class="row">
+                                <i class="material-icons prefix">date_range</i>
+                                <input type="text" class="datepicker" id="start-date" required placeholder="Departure Date">   
+                            </div>
+                            <div class="row">
+                                <i class="material-icons prefix">date_range</i>
+                                <input type="text" class="datepicker" id="end-date" required placeholder="Return Date">
+                            </div>
+                            <div class="row mt-4 ml-5">
+                                <button class="btn btn-success" type="button" id="submit">Submit
+                                <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <p>output</p>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+        
+    </div>    
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="assets/js/scriptCovid.js"></script>
     <script src="assets/js/script.js"></script>
-  
+
 </body>
 </html>
