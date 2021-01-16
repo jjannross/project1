@@ -18,3 +18,24 @@ html {
     border-radius: 0;
     border-bottom: 10px solid black;
 }
+
+.container {
+    margin: auto 10%;
+    background-color:#0d335d ;
+    overflow: auto;
+}
+
+.destination-block {
+    background-color:#fff3e6;
+}
+
+.footer {
+    height: 45px;
+    border-top: 6px solid #79a3b1;
+    margin-top: 3px;
+    background-color:#fcf8ec;
+    padding-top: 14px;
+    color: #fff;
+}
+
+
