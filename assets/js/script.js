@@ -1,5 +1,9 @@
 $(document).ready(function() {
     var listings = []
+    var airlineCode = "";
+    var offers = {};
+    var flightPrice = 0;
+
     function buildQueryURL(){
         var origin = $('#origin-input')
         var destination =$('#destination-input')
@@ -35,14 +39,51 @@ $(document).ready(function() {
               //collect price and airlineCode
               for(var i = 0; i < 5; i++){
                 //create an object
-                var flightPrice = response.data[i].price.base;
-                var airlineCode = response.data[i].validatingAirlineCodes[0];
-                var offers = {price: flightPrice, code: airlineCode}
+                flightPrice = response.data[i].price.base;
+                airlineCode = response.data[i].validatingAirlineCodes[0];
+                offers = {price: flightPrice, code: airlineCode}
                 listings.push(offers)
               }
 
               console.log(listings)
               console.log(listings[1])
+
+              
+          }).then(function() {
+
+            //combine airline codes to lookup in one AJAX call
+            var codes = "";
+            var airlineURL = "https://test.api.amadeus.com/v1/reference-data/airlines?airlineCodes=";
+
+            listings.forEach(function(item, i) {
+
+                codes += item.code;
+                //add comma if not last entry
+                if (i != listings.length - 1) {
+                    codes += ",";
+                }
+            })
+
+            $.ajax({
+                url: airlineURL + codes,
+                type: 'GET',
+                // Fetch the stored token from localStorage and set in the header
+                headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
+              }).then(function(airline){
+                
+                listings.forEach(function(listing, i) {
+                    airline.data.forEach(function(data, j) {
+
+                        if (listing.code === data.iataCode) {
+                            listing.airlineName = data.businessName;
+                        } else {
+                            listing.airlineName = "Unknown";
+                        }
+
+                    })
+                })
+              })
+      console.log(listings);
 
           })
       })
