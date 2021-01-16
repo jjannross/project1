@@ -15,6 +15,7 @@ $(document).ready(function() {
             'client_secret': 'TI5XaP4vYOLM93yG'
         },
         contentType: "application/json",
+        crossDomai: true,
         
       }).then(function(authResponse){
           console.log(authResponse);
