@@ -19,7 +19,7 @@ $(document).ready(function() {
       }).then(function(authResponse){
           console.log(authResponse);
         $.ajax({
-            url: "https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",
+            url: "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2021-02-01&adults=1",
             type: 'GET',
             // Fetch the stored token from localStorage and set in the header
             headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
