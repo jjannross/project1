@@ -26,6 +26,13 @@ $(document).ready(function() {
           }).then(function(response){
               console.log(response);
               //code
+              console.log(response);
+              
+              console.log(response.data[0])
+              //base price
+              console.log(response.data[0].price.base)
+              //airline code
+              console.log(response.data[0].validatingAirlineCodes)
           })
       })
 })
