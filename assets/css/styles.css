@@ -16,6 +16,19 @@ html {
     min-height: 100%
 }
 
+table {
+    margin-top: 15px;
+}
+
+th{
+    padding-bottom: 10px;
+}
+td {
+    height: 200px;
+    width: 400px;
+    border: 10px solid green;
+}
+
 .jumbotron {
     text-align: center;
     background-color: #fff3e6;
