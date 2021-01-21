@@ -71,20 +71,19 @@ $(document).ready(function() {
                 headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
               }).then(function(airline){
                 
-                listings.forEach(function(listing, i) {
+                listings.forEach(function(item, i) {
                     airline.data.forEach(function(data, j) {
 
-                        if (listing.code === data.iataCode) {
-                            listing.airlineName = data.businessName;
+                        if (item.code === data.iataCode) {
+                            item.airlineName = data.businessName;
                         } else {
-                            listing.airlineName = "Unknown";
+                            item.airlineName = "Unknown";
                         }
 
                     })
                 })
               })
-      console.log(listings);
-
           })
       })
 })
+    
