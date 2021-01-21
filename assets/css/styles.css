@@ -25,9 +25,10 @@ html {
 }
 
 .container {
-    margin: auto 10%;
+    margin: 50px auto 50px auto;
     background-color:#0d335d ;
     overflow: auto;
+    padding-bottom: 50px;
 }
 
 .destination-block {
@@ -56,4 +57,9 @@ html {
 
 .covid-block {
     background-color: #fff3e6;
+    padding-top: 30px;
+}
+
+.hospitalization {
+    margin-left: 90px;
 }
