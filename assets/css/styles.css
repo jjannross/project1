@@ -1,82 +1,103 @@
 body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1;
-    background-color: #1a508b;
-    box-sizing: border-box;
-    word-wrap: normal;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  background-color: #1a508b;
+  box-sizing: border-box;
+  word-wrap: normal;
 }
 
 p {
-    word-wrap: normal;
+  word-wrap: normal;
 }
 
 html {
-    position: relative;
-    min-height: 100%
+  position: relative;
+  min-height: 100%;
 }
 
 table {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
-th{
-    padding-bottom: 10px;
+th {
+  padding-bottom: 10px;
 }
 td {
-    height: 200px;
-    width: 400px;
-    border: 10px solid green;
+  height: 200px;
+  width: 400px;
+  border: 10px solid green;
 }
 
 .jumbotron {
-    text-align: center;
-    background-color: #fff3e6;
-    color: white;
-    border-radius: 0;
-    border-bottom: 10px solid black;
-    height: 20%;
-    background-image:url("/assets/images/airplane-wallpaper.jpg");
-    background-size: cover, contain;
-    background-repeat: no-repeat;
+  text-align: center;
+  background-color: #fff3e6;
+  color: white;
+  border-radius: 0;
+  border-bottom: 10px solid black;
+  height: 20%;
+  background-image: url("/assets/images/airplane-wallpaper.jpg");
+  background-size: cover, contain;
+  background-repeat: no-repeat;
 }
 
 .container {
-    margin: 50px auto 50px auto;
-    background-color:#0d335d ;
-    overflow: auto;
-    padding-bottom: 50px;
+  margin: 50px auto 50px auto;
+  background-color: #0d335d;
+  overflow: auto;
+  padding-bottom: 50px;
 }
 
 .destination-block {
-    background-color:#fff3e6;
+  background-color: #fff3e6;
 }
 
 .footer {
-    height: 45px;
-    border-top: 6px solid #79a3b1;
-    margin-top: 3px;
-    background-color:#fcf8ec;
-    padding-top: 14px;
-    color: #fff;
+  height: 45px;
+  border-top: 6px solid #79a3b1;
+  margin-top: 3px;
+  background-color: #fcf8ec;
+  padding-top: 14px;
+  color: #fff;
 }
 
 .row {
-    margin: 20px auto;
+  margin: 20px auto;
 }
 
 .center {
-    margin: auto;
-    width: 100%;
-    border: 7px solid green;
-    padding: 10px;
+  margin: auto;
+  width: 100%;
+  border: 7px solid green;
+  padding: 10px;
 }
 
 .covid-block {
-    background-color: #fff3e6;
-    padding-top: 30px;
+  background-color: #fff3e6;
+  padding-top: 30px;
 }
 
 .hospitalization {
-    margin-left: 90px;
+  margin-left: 90px;
+}
+
+.bootstrap-iso {
+  background-color: #fff3e6 !important;
+}
+
+.bootstrap-iso .form-group {
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+}
+.bootstrap-iso .formden_header h2,
+.bootstrap-iso .formden_header p,
+.bootstrap-iso form {
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+.asteriskField {
+  color: red;
 }
