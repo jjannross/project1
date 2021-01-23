@@ -234,11 +234,11 @@ $.ajax({
         //set covid statistics
         if (item.state === state.code) {
           state.positiveIncrease = item.positiveIncrease;
-          state.positive = item.positive;
-          state.death = item.death;
+          state.positive = formatNumber(item.positive);
+          state.death = formatNumber(item.death);
           state.hospitalizedCurrently = item.hospitalizedCurrently;
-          state.hospitalizedPer = state.hospitalizedCurrently / (state.population / 100000);
-          state.increasePer = state.positiveIncrease / (state.population / 100000);
+          state.hospitalizedPer = (state.hospitalizedCurrently / (state.population / 100000)).toFixed(0);
+          state.increasePer = (state.positiveIncrease / (state.population / 100000)).toFixed(0);
         }
       });
     });
@@ -250,13 +250,16 @@ $.ajax({
     stateCodes.forEach(function (item, i) {
       item.rank = i + 1;
     });
-
-    console.log(stateCodes);
   });
 });
 
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
 
 function submit () {
+
+  var city = $("#destination-input").val();
 
   //Get state based on city entered
   $.ajax({
@@ -278,17 +281,26 @@ function submit () {
   }).then(function(authResponse){
       
     $.ajax({
-      url: "https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&countryCode=US&keyword=charleston",
+      url: "https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&countryCode=US&page%5Blimit%5D=10&page%5Boffset%5D=0&sort=analytics.travelers.score&view=FULL&keyword=" + city,
       type: 'GET',
       // Fetch the stored token from localStorage and set in the header
       headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
     }).then(function(response){
-        console.log(response);
         inputState = response.data[0].address.stateCode;
-        console.log(inputState);
+        displayCovidData();
     })
   })
 }
 
-submit();
+function displayCovidData() {
+  var stateObject = stateCodes.find(function (item){
+    return (item.code === inputState);
+  })
+  $("#change").text(stateObject.increasePer);
+  $("#rank").text(stateObject.rank);
+  $("#hospitalizations").text(stateObject.hospitalizedPer);
+  $("#cases").text(stateObject.positive);
+  $("#deaths").text(stateObject.death);
+}
 
+$("#submit").click(submit);
