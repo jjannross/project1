@@ -30,8 +30,8 @@ $(document).ready(function () {
       },
       data: {
         grant_type: "client_credentials",
-        client_id: "NjkWdoTw9KJ1ISnVefwtvzolN91Lfn0m",
-        client_secret: "TI5XaP4vYOLM93yG",
+        client_id: "RayPrnJ3GqW5xMtPCaPmmjDyn3UMFAy6",
+        client_secret: "FQDvzIVwsJtqCOsh",
       },
       contentType: "application/json",
     }).then(function (authResponse) {
@@ -104,69 +104,64 @@ $(document).ready(function () {
       searchDestination(destination);
 
       console.log(origins);
-      
-      setTimeout(function(){
+
+      setTimeout(function () {
         $.ajax({
-            url:
-              "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + origins[0].iataCode + "&destinationLocationCode=" + destinations[0].iataCode + "&departureDate=2021-02-01&adults=1&max=5&currencyCode=USD",
-            type: "GET",
-            // Fetch the stored token from localStorage and set in the header
-            headers: { Authorization: "Bearer " + authResponse["access_token"] },
+          url:
+            "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" +
+            origins[0].iataCode +
+            "&destinationLocationCode=" +
+            destinations[0].iataCode +
+            "&departureDate=2021-02-01&adults=1&max=5&currencyCode=USD",
+          type: "GET",
+          // Fetch the stored token from localStorage and set in the header
+          headers: { Authorization: "Bearer " + authResponse["access_token"] },
+        })
+          .then(function (response) {
+            console.log(response);
+            //collect price and airlineCode
+            for (var i = 0; i < 5; i++) {
+              //create an object
+              flightPrice = response.data[i].price.base;
+              airlineCode = response.data[i].validatingAirlineCodes[0];
+              offers = { price: flightPrice, code: airlineCode };
+              listings.push(offers);
+            }
           })
-            .then(function (response) {
-              console.log(response);
-              //collect price and airlineCode
-              for (var i = 0; i < 5; i++) {
-                //create an object
-                flightPrice = response.data[i].price.base;
-                airlineCode = response.data[i].validatingAirlineCodes[0];
-                offers = { price: flightPrice, code: airlineCode };
-                listings.push(offers);
+          .then(function () {
+            //combine airline codes to lookup in one AJAX call
+            var codes = "";
+            var airlineURL =
+              "https://test.api.amadeus.com/v1/reference-data/airlines?airlineCodes=";
+
+            listings.forEach(function (item, i) {
+              codes += item.code;
+              //add comma if not last entry
+              if (i != listings.length - 1) {
+                codes += ",";
               }
-    
-
-            })
-            .then(function () {
-              //combine airline codes to lookup in one AJAX call
-              var codes = "";
-              var airlineURL =
-                "https://test.api.amadeus.com/v1/reference-data/airlines?airlineCodes=";
-    
+            });
+            $.ajax({
+              url: airlineURL + codes,
+              type: "GET",
+              // Fetch the stored token from localStorage and set in the header
+              headers: {
+                Authorization: "Bearer " + authResponse["access_token"],
+              },
+            }).then(function (airline) {
               listings.forEach(function (item, i) {
-                
-    
-                codes += item.code;
-                //add comma if not last entry
-                if (i != listings.length - 1) {
-                  codes += ",";
-                }
-              });
-              $.ajax({
-                url: airlineURL + codes,
-                type: "GET",
-                // Fetch the stored token from localStorage and set in the header
-                headers: {
-                  Authorization: "Bearer " + authResponse["access_token"],
-                },
-              }).then(function (airline) {
-                listings.forEach(function (item, i) {
-                  airline.data.forEach(function (data, j) {
-                    if (item.code === data.iataCode) {
-                      item.airlineName = data.businessName;
-                    } else {
-                      item.airlineName = "Unknown";
-                    }
-                  });
+                airline.data.forEach(function (data, j) {
+                  if (item.code === data.iataCode) {
+                    item.airlineName = data.businessName;
+                  } else {
+                    item.airlineName = "Unknown";
+                  }
                 });
-                console.log(listings);
               });
-
-      }, 500);
-
-
-
-
-        });
+              console.log(listings);
+            });
+          }, 500);
+      });
     });
   });
 });
