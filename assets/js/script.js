@@ -3,14 +3,31 @@ $(document).ready(function() {
     var airlineCode = "";
     var offers = {};
     var flightPrice = 0;
+    var destinations = [];
+    var origins =[];
+  
+
+    var destinationEl = $('#destination-input')
+    var originEl = $('#origin-input')
+      
+    var departureDateEl = $('#start-date')
+    var returnDateEl = $('#end-date')
+
+    function elementToVal(inputEl){
+        return inputEl.val();
+    };
+    
+
+
+ 
 
     function buildQueryURL(){
-        var origin = $('#origin-input')
-        var destination =$('#destination-input')
-        var departureDate = $('#start-date')
-        var returnDate = $('#end-date')
-    }
 
+    }
+    function authAjax(){
+
+    }
+$('#submit').click(function(){
     $.ajax({
         url: "https://test.api.amadeus.com/v1/security/oauth2/token",
         dataType: "json",
@@ -27,7 +44,37 @@ $(document).ready(function() {
         },
         contentType: "application/json",
         
-      }).then(function(authResponse){
+      }).then(function(authResponse){   
+
+            //makes keyword search
+               var destination = destinationEl.val()
+               destination = destination.split(',')
+               console.log(destination)
+
+               if(destination[0] === ''){
+                    return
+               }else {
+                   $.ajax({
+                    url: 'https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=' + destination[0] + '&countryCode=US&page[limit]=5',
+                    type: 'GET',
+                    headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
+                }).then(function(key){
+                    console.log(key)
+                    for (var j = 0; j < 5; j++){
+                        var subType = key.data[j].subType
+                        var subTypeName = key.data[j].name
+                        var iataCode = key.data[j].iataCode
+                        var location = {'airport or city': subType, 'location name': subTypeName, iataCode: iataCode}
+                        destinations.push(location)
+                      };
+                    
+                }); 
+                console.log(destinations);
+               };
+        
+        console.log(locations)
+        console.log(destinations);
+
           
         $.ajax({
             url: "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2021-02-01&adults=1&max=5",
@@ -56,6 +103,7 @@ $(document).ready(function() {
             var airlineURL = "https://test.api.amadeus.com/v1/reference-data/airlines?airlineCodes=";
 
             listings.forEach(function(item, i) {
+                console.log(item);
 
                 codes += item.code;
                 //add comma if not last entry
@@ -82,8 +130,11 @@ $(document).ready(function() {
 
                     })
                 })
+                console.log(listings)
               })
           })
       })
+})
+  
 })
     
