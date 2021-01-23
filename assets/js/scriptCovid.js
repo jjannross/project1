@@ -1,3 +1,4 @@
+var inputState = "";
 var stateCodes = [
   {
     name: "Alabama",
@@ -236,8 +237,8 @@ $.ajax({
           state.positive = item.positive;
           state.death = item.death;
           state.hospitalizedCurrently = item.hospitalizedCurrently;
-          state.increasePer =
-            state.positiveIncrease / (state.population / 100000);
+          state.hospitalizedPer = state.hospitalizedCurrently / (state.population / 100000);
+          state.increasePer = state.positiveIncrease / (state.population / 100000);
         }
       });
     });
@@ -251,7 +252,43 @@ $.ajax({
     });
 
     console.log(stateCodes);
-
-    //$("#covid-tbd").text(stateCodes);
   });
 });
+
+
+function submit () {
+
+  //Get state based on city entered
+  $.ajax({
+    url: "https://test.api.amadeus.com/v1/security/oauth2/token",
+    dataType: "json",
+    type: 'POST',
+    headers: {
+        "Access-Control-Allow-Origin" : "*",
+        'Access-Control-Allow-Headers': '*',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },
+    data:{
+        'grant_type': 'client_credentials',
+        'client_id': 'NjkWdoTw9KJ1ISnVefwtvzolN91Lfn0m',
+        'client_secret': 'TI5XaP4vYOLM93yG'
+    },
+    contentType: "application/json",
+    
+  }).then(function(authResponse){
+      
+    $.ajax({
+      url: "https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&countryCode=US&keyword=charleston",
+      type: 'GET',
+      // Fetch the stored token from localStorage and set in the header
+      headers: {"Authorization": 'Bearer ' + authResponse['access_token']}
+    }).then(function(response){
+        console.log(response);
+        inputState = response.data[0].address.stateCode;
+        console.log(inputState);
+    })
+  })
+}
+
+submit();
+
