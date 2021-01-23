@@ -108,7 +108,7 @@ $(document).ready(function () {
       setTimeout(function(){
         $.ajax({
             url:
-              "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LAX&destinationLocationCode=RDU&departureDate=2021-02-01&adults=1&max=5&currencyCode=USD",
+              "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=" + origins[0].iataCode + "&destinationLocationCode=" + destinations[0].iataCode + "&departureDate=2021-02-01&adults=1&max=5&currencyCode=USD",
             type: "GET",
             // Fetch the stored token from localStorage and set in the header
             headers: { Authorization: "Bearer " + authResponse["access_token"] },
