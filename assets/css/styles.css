@@ -32,9 +32,13 @@ td {
 .jumbotron {
     text-align: center;
     background-color: #fff3e6;
-    color: black;
+    color: white;
     border-radius: 0;
     border-bottom: 10px solid black;
+    height: 20%;
+    background-image:url("/assets/images/airplane-wallpaper.jpg");
+    background-size: cover, contain;
+    background-repeat: no-repeat;
 }
 
 .container {
