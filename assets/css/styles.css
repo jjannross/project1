@@ -45,7 +45,7 @@ td {
   margin: 50px auto 50px auto;
   background-color: #0d335d;
   overflow: auto;
-  padding-bottom: 50px;
+  padding-bottom: 40px auto;
 }
 
 .destination-block {
@@ -69,17 +69,28 @@ td {
   margin: auto;
   width: 100%;
   border: 7px solid green;
-  padding: 10px;
+  padding: 5px;
 }
 
 .covid-block {
-  background-color: #fff3e6;
-  padding-top: 30px;
+  margin: 50px auto 50px auto;
+  border-color: #0d335d;
+  background-color: #fcf8ec;
+  overflow: auto;
+  padding-bottom: 50px;
+  border-width: 30px;
 }
 
-.hospitalization {
-  margin-left: 90px;
-}
+.tips {
+    margin: 50px auto 50px auto;
+    border-color: #0d335d;
+    background-color: #fcf8ec;
+    overflow: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-width: 30px;
+  }
+
 
 .bootstrap-iso {
   background-color: #fff3e6 !important;

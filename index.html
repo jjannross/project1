@@ -86,7 +86,7 @@
 
                             <input
                               class="form-control"
-                              id="date"
+                              id="departure-date"
                               name="date"
                               placeholder="MM/DD/YYYY"
                               type="text"
@@ -101,7 +101,7 @@
                             </div>
                             <input
                               class="form-control"
-                              id="date"
+                              id="arrival-date"
                               name="date"
                               placeholder="MM/DD/YYYY"
                               type="text"
@@ -121,9 +121,10 @@
                 </div>
               </form>
             </div>
+            <!-- output: flight results -->
             <div class="col-md-6">
-              <table>
-                <th>output</th>
+              <table id="flight-results">
+                <th></th>
                 <tr></tr>
                 <td></td>
               </table>
@@ -136,57 +137,68 @@
           <header class="row">
             <div class="col-md-12">
               <div class="page-header">
-                <h3>Covid</h3>
+                <h3>COVID-19 Data for: <p id="state"></p></h3>
               </div>
               <hr />
             </div>
           </header>
           <div class="col-md-12">
-            <p>Covid information</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-              facilis quaerat aut vero magnam iste dolore consequatur ea veniam
-              in inventore architecto reiciendis repellendus dolor similique
-              ipsam, ad cumque non?Lorem ipsum, dolor sit amet consectetur
-              adipisicing elit. Rem nam molestias nulla saepe cumque error,
-              dicta quo quas eligendi quaerat! Maxime error inventore a sapiente
-              omnis illo laborum fugit nisi! Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Odio harum sit quasi corrupti dolor
-              voluptates fugiat ipsa deleniti earum, vitae, nobis illo ad facere
-              aliquam provident nemo perspiciatis eligendi deserunt.
+            <p style="font-size: 20px;">
+        Traveling safely in the day of a pandemic means knowing the destination. See up to date COVID-19 data below for the chosen destination.
             </p>
           </div>
+          <div class="row covid-block">
+            <div class="col-md-2">
+              <strong>New Daily Cases per 100k</strong>
+              <hr />
+              <p id="change"></p>
+            </div>
+            <div class="col-md-3">
+              <strong>State Rank (Based on Daily Change)</strong>
+              <hr />
+              <p id="rank"></p>
+            </div>
+            <div class="col-md-3 hospitalization">
+              <strong>Current Hospitalizations per 100K</strong>
+              <hr />
+              <p id="hospitalizations"></p>
+            </div>
+    
+            <div class="col-md-2">
+              <strong>Total Cases</strong>
+              <hr />
+              <p id="cases"></p>
+            </div>
+            <div class="col-md-2">
+              <strong>Total Deaths</strong>
+              <hr />
+              <p id="deaths"></p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="row covid-block center">
-        <div class="col-md-2">
-          <strong>Change from Yesterday per 100k</strong>
-          <hr />
-          <p id="change"></p>
+        <div class="container">
+        <div class="row tips">
+            <div class="col">
+              <h3>When You Do Travel</h3>
+              <hr />
+              <p style="font-size: 19px">If you do decide to travel, take the time to research the best steps to take. The CDC has compiled a list of steps during travel to protect yourself and others from COVID-19:
+                <ul style="font-size: 16px">
+                    <li>Check travel restrictions before you go.</li>
+                    <li> Get your flu shot before you travel.</li>
+                    <li>Bring extra supplies, such as masks and hand sanitizer.</li>
+                    <li>Wear a mask to keep your nose and mouth covered when in public settings.</li>
+                    <li>Avoid close contact by staying at least 6 feet apart (about 2 arm lengths) from anyone who is not from your travel group.</li>
+                    <li>Wash your hands often or use hand sanitizer.</li>
+                    <li>Avoid touching your eyes, nose, and mouth.</li>
+                </ul>
+                <p style="font-size: 19px">To view a complete list and further information, visit the CDC COVID-19 page <a href="https://www.cdc.gov/coronavirus/2019-ncov/travelers/travel-during-covid19.html">here</href>.</p>
+            
+                </p>
+            </div>
         </div>
-        <div class="col-md-2">
-          <strong>State Rank (Based on Daily Change)</strong>
-          <hr />
-          <p id="rank"></p>
-        </div>
-        <div class="col-md-2 hospitalization">
-          <strong>Current Hospitalizations per 100K</strong>
-          <hr />
-          <p id="hospitalizations"></p>
-        </div>
-
-        <div class="col-md-2">
-          <strong>Total Cases</strong>
-          <hr />
-          <p id="cases"></p>
-        </div>
-        <div class="col-md-2">
-          <strong>Total Deaths</strong>
-          <hr />
-          <p id="deaths"></p>
-        </div>
-      </div>
     </div>
+      </div>
+      
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="assets/js/scriptCovid.js"></script>
     <script src="assets/js/script.js"></script>
