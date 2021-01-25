@@ -9,13 +9,28 @@ $(document).ready(function () {
   var destinationEl = $("#destination-input");
   var originEl = $("#origin-input");
 
-  var departureDateEl = $("#date.form-control").val()
-  var returnDateEl = $("#date").text()
+
+  var flightTime = '';
+  var flightid = [$('#flight1'), $('#flight2'), $('#flight3')]
 
 
   $("#submit").click(function () {
-      console.log(departureDateEl);
-      console.log(returnDateEl);
+    var departureDateEl = $('#departure-date') 
+    var returnDateEl = $('#arrival-date')
+    var dateArray = [departureDateEl.val(), returnDateEl.val()]
+
+    function formatDates(item, i){
+          
+          var newdateArray = item.split('/');
+          
+          console.log( dateArray[i] = newdateArray[2]+'-'+newdateArray[0]+'-'+newdateArray[1])
+        
+      }
+      dateArray.forEach(formatDates);
+      console.log(dateArray)
+
+      
+      var returnDateEl = $('#arrival-date')
 
     $.ajax({
       url: "https://test.api.amadeus.com/v1/security/oauth2/token",
@@ -106,7 +121,7 @@ $(document).ready(function () {
             originiataCode[0] +
             "&destinationLocationCode=" +
             destIataCode[0] +
-            "&departureDate=2021-02-01&adults=1&max=5&currencyCode=USD",
+            "&departureDate=" + dateArray[0] + "&returnDate=" + dateArray[1]+ "&adults=1&max=5&currencyCode=USD",
           type: "GET",
           // Fetch the stored token from localStorage and set in the header
           headers: { Authorization: "Bearer " + authResponse["access_token"] },
@@ -118,7 +133,10 @@ $(document).ready(function () {
               //create an object
               flightPrice = response.data[i].price.base;
               airlineCode = response.data[i].validatingAirlineCodes[0];
-              offers = { price: flightPrice, code: airlineCode };
+              flightTime = response.data[i].itineraries[0].duration
+              
+              
+              offers = { price: flightPrice, code: airlineCode, duration: flightTime.slice(2) };
               listings.push(offers);
             }
       
@@ -154,8 +172,39 @@ $(document).ready(function () {
                 });
               });
               console.log(listings);
+
+              
+              
+              
             })
+
         })
+
+
+              setTimeout(function(){
+                flightid.forEach(function(item, i){
+                          item.text('flight'+ ' '+ (1+i))        
+                  var newDiv = $('<div>').addClass('card-body');
+                  var newP = $('<p>').addClass('card-text');
+                
+                  var newP1 = $('<p>').addClass('card-text');
+                 
+                  var newP2 = $('<p>').addClass('card-text');
+               
+               
+
+                item.append(newDiv)
+                newP.text('Price:' + ' ' + '$'+listings[i].price)
+                newDiv.append(newP)
+                newP1.text('Airline:' +listings[i].airlineName)
+                newDiv.append(newP1);
+                newP2.text('Duration:' + listings[i].duration+'')
+                newDiv.append(newP2)
+                });
+              },500);
+                
+              
+              
     })
           }, 3000);
       });
