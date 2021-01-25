@@ -301,6 +301,7 @@ function displayCovidData() {
   $("#hospitalizations").text(stateObject.hospitalizedPer);
   $("#cases").text(stateObject.positive);
   $("#deaths").text(stateObject.death);
+  $("#state").text(stateObject.name);
 }
 
 $("#submit").click(submit);
