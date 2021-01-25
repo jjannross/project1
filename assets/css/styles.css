@@ -82,15 +82,14 @@ td {
 }
 
 .tips {
-    margin: 50px auto 50px auto;
-    border-color: #0d335d;
-    background-color: #fcf8ec;
-    overflow: auto;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-width: 30px;
-  }
-
+  margin: 50px auto 50px auto;
+  border-color: #0d335d;
+  background-color: #fcf8ec;
+  overflow: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-width: 30px;
+}
 
 .bootstrap-iso {
   background-color: #fff3e6 !important;
@@ -111,4 +110,8 @@ td {
 
 .asteriskField {
   color: red;
+}
+.card {
+  background-color: #cec7c7;
+  border-color: black;
 }
